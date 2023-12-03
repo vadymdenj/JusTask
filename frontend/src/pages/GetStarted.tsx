@@ -1,6 +1,7 @@
 import { useState } from "react"
 import { useForm, SubmitHandler } from "react-hook-form"
 import Places from "../components/Places"
+import { Link } from "react-router-dom"
 
 export default function GetStarted() {
   const [tasks, setTasks] = useState<{ fixed: Task[]; free: Task[] }>({
@@ -49,6 +50,8 @@ export default function GetStarted() {
         </div>
         <Form handleAddTask={handleAddTask} />
       </div>
+
+      <Link to="/">Create agenda</Link>
     </div>
   )
 }

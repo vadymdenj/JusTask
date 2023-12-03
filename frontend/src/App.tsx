@@ -7,9 +7,9 @@ function App() {
   const { sessions } = useSessionList()
   const { user } = useUser()
   const navigate = useNavigate()
-  if (user && sessions?.length === 1) {
-    navigate("/get-started")
-  }
+  // if (user && sessions?.length === 1) {
+  //   navigate("/get-started")
+  // }
 
   return (
     <div>
