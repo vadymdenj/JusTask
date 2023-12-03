@@ -37,7 +37,8 @@ def display_token():
 def fastest_travel_endPoint():
     eventName = request.args.get('eventName')
     eventAddress = request.args.get('eventAddress')
-    eventDuration = request.args.get('eventDuration')
+    eventStart = request.args.get('eventStart')
+    eventEnd = request.args.get('eventEnd')
 
     event = {"name": eventName, "start": eventStart, "end": eventEnd, "address": eventAddress}
     task = {"name":"Grocery Shopping","duration":30, "address":"2901 Pacific Ave San Francisco, CA 94115"}
