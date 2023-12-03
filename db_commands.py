@@ -21,14 +21,17 @@ connection = pymysql.connect(
 cursor = connection.cursor()
 
 # Execute a SQL query
+#cursor.execute('INSERT INTO scheduler VALUES (%s, %s, %s, %s, %s, %s)', ("santiago", "E", "1410 NE Campus Pkwy Seattle, WA 98195", "1400", "1500", 60))
+
 cursor.execute('SELECT * FROM scheduler')
 
 # Fetch the results
 results = cursor.fetchall()
 
+connection.commit()
+
 # Print the results
-for result in results:
-    print(result)
+print(results)
 
 # Close the cursor and connection
 cursor.close()

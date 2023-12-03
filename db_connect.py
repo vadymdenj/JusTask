@@ -15,10 +15,11 @@ cursor = cnx.cursor()
 create_table_query = '''
 CREATE TABLE scheduler (
   uid VARCHAR(64) NOT NULL UNIQUE,
-  type VARCHAR(1) NOT NULL,
-  task_address VARCHAR(128) NOT NULL,
-  start INT, 
-  end INT,
+  event_name VARCHAR(64) NOT NULL,
+  event_address VARCHAR(128) NOT NULL,
+  flexible VARCHAR(1) NOT NULL,
+  start VARCHAR(4), 
+  end VARCHAR(4),
   dur INT
 )
 '''
@@ -31,6 +32,3 @@ cnx.commit()
 # close cursor and connection objects
 cursor.close()
 cnx.close()
-
-
-
