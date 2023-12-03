@@ -24,13 +24,12 @@ def get_event(uid):
     cursor.execute('SELECT * FROM scheduler where uid = %s', (uid))
     # Fetch the results
     results = cursor.fetchall()
-    print(results)
     connection.commit()
     cursor.close()
     connection.close()
     returned = []
     for i in results:
-        returned.append= ({"uid":i[0],
+        returned.append({"uid":i[0],
                 "event_name":i[1],
                 "address":i[2],
                 "flexible":i[3],

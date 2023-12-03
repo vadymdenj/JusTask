@@ -49,6 +49,7 @@ def getTravelTime(token, fromPoint, toPoint, departureTime):
 
         # print(findRouteTravelTimeResponse)
         root = ET.parse(RESPONSE_XML_FILE_NAME).getroot()    
+        print(ET.dump(root))
         travelTime = root.find('./Trip/Route/TravelTimes/TravelTime').attrib['travelTimeMinutes']
         return travelTime
 

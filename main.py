@@ -41,8 +41,9 @@ def fastest_travel_endPoint():
 
     body = request.json
     calendar = get_event('santiago')
-    calendars = [calendar,calendar,calendar]
-    print(calendars)
+    calendars = []
+    for i in calendar:
+        calendars.append(i)
     task = {"name": body['eventName'],"duration":body['eventDuration'], "address":body['eventAddress']}
     addedFlexibleEvent = fastest_travel(task, calendars)
     # calendar=[event,event,event]

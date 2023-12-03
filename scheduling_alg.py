@@ -38,16 +38,21 @@ def fastest_travel(task, calendar):
         returned = ""
         for i in calendar:
             j = next(calendar,i)
-            if j != -1:
+            print("\n",i)
+            if j != -1 and i.get("flexible") != "Y" and j.get("flexible") != "Y":
                 s_t = convert(j.get("start"), now)
                 e_t = convert(i.get("end"), now)
+                print(s_t,e_t)
                 s_a = i.get("address")
                 e_a = j.get("address")
                 dur = timedelta(minutes=int(task.get("duration")))
+                print(1)
                 for k in range(int(dur.total_seconds()/60/interval)):
                     new_time = e_t + timedelta(minutes=k*interval)
+                    print(duration(start=s_t,end=e_t))
                     if duration(s_t, e_t) >= dur:
                         # statement = getTravelTime(get_token(), '37.770637, -122.412435', '37.781613, -122.494546', e_t)
+                        print(new_time.strftime("%Y-%m-%dT%H:%M:%SZ"))
                         statement = getTravelTime(get_token(), addr_to_loc(s_a), addr_to_loc(task.get("address")), new_time.strftime("%Y-%m-%dT%H:%M:%SZ"))
                         print("statement",statement)
                         if fastest_travel > int(statement):
@@ -92,7 +97,9 @@ def next(list,index):
         return -1
     return list[i+1]
 def duration(start, end):
-    return start-end
+    if start > end:
+        return start-end
+    return end-start
 
 # def main():
     
