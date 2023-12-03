@@ -38,4 +38,4 @@ def add_event(uid, event_name, event_address, flexible, start, end, dur):
     cursor.close()
     connection.close()
 
-add_event("santiago", "golfing", "1410 NE Campus Pkwy Seattle, WA 98195", "N", "1400", "1500", 60)
+#add_event("santiago", "golfing", "1410 NE Campus Pkwy Seattle, WA 98195", "N", "1400", "1500", 60)
