@@ -1,3 +1,4 @@
+from ntpath import join
 from tkinter import Entry
 from dao import add_event, get_event
 from flask import Flask, render_template, jsonify, request
@@ -35,22 +36,17 @@ def display_token():
 # This is the route that will help you get the token and return it as a JSON response
 @app.route('/fastestTravel', methods=['GET'])
 def fastest_travel_endPoint():
-    # eventName = request.args.get('eventName')
-    # eventAddress = request.args.get('eventAddress')
-    # eventStart = request.args.get('eventStart')
-    # eventEnd = request.args.get('eventEnd')
-
     # event = {"name": eventName, "start": eventStart, "end": eventEnd, "address": eventAddress}
     # task = {"name":"Grocery Shopping","duration":30, "address":"2901 Pacific Ave San Francisco, CA 94115"}
 
     body = request.json
-    get_event()
-
+    calander = get_event('santiago')
+    task = {"name": body['eventName'],"duration":body['eventDuration'], "address":body['eventAddress']}
+    addedFlexibleEvent = fastest_travel(task, calander)
     # calendar=[event,event,event]
-    # addedFlexibleEvent = fastest_travel(task=task,calendar=calendar)
     # if addedFlexibleEvent:
         # If successful, return a success response
-    response = {'message': 'Event added successfully', 'event': body}
+    response = {'message': 'Event added successfully', 'addedFlexibleEvent': addedFlexibleEvent}
     return jsonify(response), 200
     # else:
     #     # If there was an error, return an error response

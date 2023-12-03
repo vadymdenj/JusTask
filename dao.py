@@ -28,6 +28,7 @@ def get_event(uid):
     connection.commit()
     cursor.close()
     connection.close()
+    return results
 
 def add_event(uid, event_name, event_address, flexible, start, end, dur):
     # Create a cursor object
