@@ -1,5 +1,5 @@
 from tkinter import Entry
-from dao import add_event
+from dao import add_event, get_event
 from flask import Flask, render_template, jsonify, request
 from app.utils.auth_utils import get_token
 from flask_cors import CORS
@@ -35,23 +35,27 @@ def display_token():
 # This is the route that will help you get the token and return it as a JSON response
 @app.route('/fastestTravel', methods=['GET'])
 def fastest_travel_endPoint():
-    eventName = request.args.get('eventName')
-    eventAddress = request.args.get('eventAddress')
-    eventStart = request.args.get('eventStart')
-    eventEnd = request.args.get('eventEnd')
+    # eventName = request.args.get('eventName')
+    # eventAddress = request.args.get('eventAddress')
+    # eventStart = request.args.get('eventStart')
+    # eventEnd = request.args.get('eventEnd')
 
-    event = {"name": eventName, "start": eventStart, "end": eventEnd, "address": eventAddress}
-    task = {"name":"Grocery Shopping","duration":30, "address":"2901 Pacific Ave San Francisco, CA 94115"}
-    calendar=[event,event,event]
-    addedFlexibleEvent = fastest_travel(task=task,calendar=calendar)
-    if addedFlexibleEvent:
+    # event = {"name": eventName, "start": eventStart, "end": eventEnd, "address": eventAddress}
+    # task = {"name":"Grocery Shopping","duration":30, "address":"2901 Pacific Ave San Francisco, CA 94115"}
+
+    body = request.json
+    get_event()
+
+    # calendar=[event,event,event]
+    # addedFlexibleEvent = fastest_travel(task=task,calendar=calendar)
+    # if addedFlexibleEvent:
         # If successful, return a success response
-        response = {'message': 'Event added successfully', 'event': addedFlexibleEvent}
-        return jsonify(response), 200
-    else:
-        # If there was an error, return an error response
-        response = {'message': 'Failed to add event'}
-        return jsonify(response), 500
+    response = {'message': 'Event added successfully', 'event': body}
+    return jsonify(response), 200
+    # else:
+    #     # If there was an error, return an error response
+    #     response = {'message': 'Failed to add event'}
+    #     return jsonify(response), 500
 
 # @app.route('/add_event', methods=['PUT'])
 # def fastest_travel_endPoint():
