@@ -48,4 +48,6 @@ def add_event(uid, event_name, event_address, flexible, start, end, dur):
     cursor.close()
     connection.close()
 
-#add_event("santiago", "golfing", "1410 NE Campus Pkwy Seattle, WA 98195", "N", "1400", "1500", 60)
+#add_event("santiago", "golfing", "8 Presidio Terrace, San Francisco, CA 94118", "N", "1400", "1500", 60)
+#add_event("santiago", "brunch", "401 Geary St, San Francisco, CA 94102", "N", "1000", "1100", 60)
+#add_event("santiago", "shopping", "2801 Bryant St, San Francisco, CA 94110", "Y", "null", "null", 60)
