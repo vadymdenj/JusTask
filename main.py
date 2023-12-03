@@ -40,9 +40,11 @@ def fastest_travel_endPoint():
     # task = {"name":"Grocery Shopping","duration":30, "address":"2901 Pacific Ave San Francisco, CA 94115"}
 
     body = request.json
-    calander = get_event('santiago')
+    calendar = get_event('santiago')
+    calendars = [calendar,calendar,calendar]
+    print(calendars)
     task = {"name": body['eventName'],"duration":body['eventDuration'], "address":body['eventAddress']}
-    addedFlexibleEvent = fastest_travel(task, calander)
+    addedFlexibleEvent = fastest_travel(task, calendars)
     # calendar=[event,event,event]
     # if addedFlexibleEvent:
         # If successful, return a success response
