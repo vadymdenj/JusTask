@@ -11,12 +11,12 @@ now = datetime.now(timezone.utc)
 # Convert to ISO 8601 format
 iso_format = now.isoformat()
 
-task = {"name":"Grocery Shopping","duration":timedelta(minutes=30), "address":"111 ave ne"}
+task = {"name":"Grocery Shopping","duration":30, "address":"2901 Pacific Ave San Francisco, CA 94115"}
 
 wake = {"name":"sleep",
         "start":"2300",
         "end":"0700",
-        "address":"840 Brannan St San Francisco, CA 94103"}
+        "address":"943 S Van Ness Ave San Francisco, CA 94110"}
 event1 = {"name":"CSE 373",
           "start":"1430",
           "end":"1520",
@@ -28,29 +28,36 @@ event2 = {"name":"CSE 311",
 event3 = {"name":"gym",
           "start":"1930",
           "end":"2130",
-          "address":"943 S Van Ness Ave San Francisco, CA 94110"}
+          "address":"840 Brannan St San Francisco, CA 94103"}
 calendar = [wake,event1,event2,event3]
 interval = 15
 def fastest_travel(task, calendar):
-    fastest_travel = sys.maxsize
-
-    for i in calendar:
-        j = next(calendar,i)
-        if j != -1:
-            s_t = convert(j.get("start"), now)
-            e_t = convert(i.get("end"), now)
-            s_a = i.get("address")
-            e_a = j.get("address")
-            dur = task.get("duration")
-            for k in range(int(dur.total_seconds() / 60 / interval)):
-                new_time = now + timedelta(minutes=k*interval)
+    try:
+        fastest_travel = sys.maxsize
+        slowest_travel = 0
+        returned = ""
+        for i in calendar:
+            j = next(calendar,i)
+            if j != -1:
+                s_t = convert(j.get("start"), now)
+                e_t = convert(i.get("end"), now)
+                s_a = i.get("address")
+                e_a = j.get("address")
+                dur = timedelta(minutes=task.get("duration"))
+                new_time = e_t + timedelta(minutes=k*interval)
                 if duration(s_t, e_t) >= dur:
                     # statement = getTravelTime(get_token(), '37.770637, -122.412435', '37.781613, -122.494546', e_t)
-                    statement = getTravelTime(get_token(), addr_to_loc(s_a), addr_to_loc(e_a), new_time.strftime("%Y-%m-%dT%H:%M:%SZ"))
+                    statement = getTravelTime(get_token(), addr_to_loc(s_a), addr_to_loc(task.get("address")), new_time.strftime("%Y-%m-%dT%H:%M:%SZ"))
                     print("statement",statement)
                     if fastest_travel > int(statement):
                         fastest_travel = int(statement)
-                return e_t
+                        returned = new_time.strftime("%H%M")
+                    if slowest_travel < int(statement):
+                        slowest_travel = int(statement)
+        return f"Fastest Travel Time: {fastest_travel}mins, You saved: {slowest_travel-fastest_travel} minutes ,Task Start Time: {returned}"
+        
+    except:
+        return -1
 # def fastest_travel(task, calendar):
 #     fastest_travel = sys.maxsize
 #     returned = -1
