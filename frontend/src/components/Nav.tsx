@@ -1,4 +1,5 @@
-import { useUser, SignInButton } from "@clerk/clerk-react"
+import { useUser, SignInButton, SignOutButton } from "@clerk/clerk-react"
+import logoRoute from "../assets/logo.svg"
 
 export default function Nav() {
   const { user } = useUser()
@@ -6,13 +7,23 @@ export default function Nav() {
   return (
     <header className="flex items-center justify-between px-9 py-3 bg-gray-400">
       <h1 className="font-display text-2xl flex flex-col justify-center items-center w-fit text-zinc-100">
-        Turbo <span>Tax</span>
+        <img src={logoRoute} alt="" width={40} height={40} />
       </h1>
       {!user ? (
-        <SignInButton mode="modal">Login</SignInButton>
-      ) : (
         <div>
-          <img src={user.imageUrl} alt="" />
+          <SignInButton mode="modal" afterSignInUrl="/get-started">
+            Login
+          </SignInButton>
+        </div>
+      ) : (
+        <div className="flex gap-4">
+          <SignOutButton>Sign out</SignOutButton>
+          <img
+            src={user.imageUrl}
+            width={40}
+            height={40}
+            className="rounded-full"
+          />
         </div>
       )}
     </header>
