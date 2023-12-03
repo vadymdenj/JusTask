@@ -2,11 +2,11 @@
 
 import pymysql
 
-host = 'mysql-db.cdql6ypincjq.us-east-1.rds.amazonaws.com'
+host = 'tasks-db.cdql6ypincjq.us-east-1.rds.amazonaws.com'
 port = 3306
 user = 'admin'
 password = 'password'
-database = 'turbotask_db'
+database = 'justask_db'
 
 # Connect to the database
 connection = pymysql.connect(

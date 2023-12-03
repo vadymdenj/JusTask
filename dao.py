@@ -2,11 +2,11 @@
 
 import pymysql
 
-host = 'mysql-db.cdql6ypincjq.us-east-1.rds.amazonaws.com'
+host = 'tasks-db.cdql6ypincjq.us-east-1.rds.amazonaws.com'
 port = 3306
 user = 'admin'
 password = 'password'
-database = 'turbotask_db'
+database = 'justask_db'
 
 # Connect to the database
 connection = pymysql.connect(
@@ -37,3 +37,5 @@ def add_event(uid, event_name, event_address, flexible, start, end, dur):
     connection.commit()
     cursor.close()
     connection.close()
+
+add_event("santiago", "golfing", "1410 NE Campus Pkwy Seattle, WA 98195", "N", "1400", "1500", 60)

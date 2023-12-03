@@ -2,10 +2,10 @@
 
 import mysql.connector
 
-endpoint = 'mysql-db.cdql6ypincjq.us-east-1.rds.amazonaws.com'
+endpoint = 'tasks-db.cdql6ypincjq.us-east-1.rds.amazonaws.com'
 username = 'admin'
 password = 'password'
-database = 'turbotask_db'
+database = 'justask_db'
 
 cnx = mysql.connector.connect(user=username, password=password,
                               host=endpoint, database=database)
