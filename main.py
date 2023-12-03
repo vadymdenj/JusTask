@@ -39,9 +39,10 @@ def fastest_travel_endPoint():
     eventAddress = request.args.get('eventAddress')
     eventDuration = request.args.get('eventDuration')
 
-    event = {"name": eventName, "duration": eventDuration, "address": eventAddress}
+    event = {"name": eventName, "start": eventStart, "end": eventEnd, "address": eventAddress}
     task = {"name":"Grocery Shopping","duration":30, "address":"2901 Pacific Ave San Francisco, CA 94115"}
-    addedFlexibleEvent = fastest_travel([event],task)
+    calendar=[event,event,event]
+    addedFlexibleEvent = fastest_travel(task=task,calendar=calendar)
     if addedFlexibleEvent:
         # If successful, return a success response
         response = {'message': 'Event added successfully', 'event': addedFlexibleEvent}
