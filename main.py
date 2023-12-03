@@ -13,7 +13,7 @@ app = Flask(__name__, template_folder='app/templates', static_url_path='/static'
 # This way, when your frontend makes requests to your Flask server, the server will respond with the appropriate CORS headers, and the browser will permit the requests. Since the frontend and backend are on the same origin (domain), you won't encounter CORS issues.
 # For more info on CORS goto: https://www.bannerbear.com/blog/what-is-a-cors-error-and-how-to-fix-it-3-ways/
 CORS(app)
-
+app.debug=False
 # This is the route that will serve your index.html template
 @app.route('/')
 def index():
@@ -40,8 +40,8 @@ def fastest_travel_endPoint():
     eventDuration = request.args.get('eventDuration')
 
     event = {"name": eventName, "duration": eventDuration, "address": eventAddress}
-
-    addedFlexibleEvent = fastest_travel(event)
+    task = {"name":"Grocery Shopping","duration":30, "address":"2901 Pacific Ave San Francisco, CA 94115"}
+    addedFlexibleEvent = fastest_travel([event],task)
     if addedFlexibleEvent:
         # If successful, return a success response
         response = {'message': 'Event added successfully', 'event': addedFlexibleEvent}
