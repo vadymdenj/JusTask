@@ -1,6 +1,11 @@
+from tkinter import Entry
+from dao import add_event
 from flask import Flask, render_template, jsonify, request
 from app.utils.auth_utils import get_token
 from flask_cors import CORS
+
+from scheduling_alg import fastest_travel
+
 
 # Create the Flask app with the template folder specified that will contain your index.html and static folder which will contain your JavaScript files
 app = Flask(__name__, template_folder='app/templates', static_url_path='/static')
@@ -26,6 +31,36 @@ def display_token():
     #If the request fails, return the error message
     else:
         return jsonify({'message': response})
+
+# This is the route that will help you get the token and return it as a JSON response
+@app.route('/fastestTravel', methods=['GET'])
+def fastest_travel_endPoint():
+    eventName = request.args.get('eventName')
+    eventAddress = request.args.get('eventAddress')
+    eventDuration = request.args.get('eventDuration')
+
+    event = {"name": eventName, "duration": eventDuration, "address": eventAddress}
+
+    addedFlexibleEvent = fastest_travel(event)
+    if addedFlexibleEvent:
+        # If successful, return a success response
+        response = {'message': 'Event added successfully', 'event': addedFlexibleEvent}
+        return jsonify(response), 200
+    else:
+        # If there was an error, return an error response
+        response = {'message': 'Failed to add event'}
+        return jsonify(response), 500
+
+# @app.route('/add_event', methods=['PUT'])
+# def fastest_travel_endPoint():
+#     userId = request.args.get('userId')
+#     eventName = request.args.get('eventName')
+#     eventAddress = request.args.get('eventAddress')
+#     eventStartTime = request.args.get('eventStartTime')
+#     eventEndTime = request.args.get('eventEndTime')
+#     eventIsFlexible = request.args.get('eventIsFlexible')
+
+#     add_event(userId, eventName, eventAddress, eventIsFlexible, eventStartTime, eventEndTime, eventEndTime-eventStartTime)
 
 if __name__ == '__main__':
     app.run(debug=False, port=5000)

@@ -92,9 +92,9 @@ def next(list,index):
 def duration(start, end):
     return start-end
 
-def main():
+# def main():
     
-    print('\n',fastest_travel(task, calendar))
+#     print('\n',fastest_travel(task, calendar))
 
-main()
+# main()
 
